@@ -1,0 +1,57 @@
+---
+title: "Ggplot2map"
+author: "Amine Ben"
+date: "10/12/2020"
+output: pdf_document
+---
+```{r}
+
+#install.packages(ggplot2)
+#install.packages("ggplot2")
+library(ggplot2)
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point()
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point(size = 1.9, color = "red", shape = 21)
+library(ggplot2)
+library(dplyr)
+require(maps)
+require(viridis)
+theme_set(
+  theme_void()
+)
+
+  
+  library(ggplot2)
+library(dplyr)
+#installed.packages("viridis")
+require(maps)
+require(viridis)
+theme_set(
+  theme_void()
+)
+monde_map <- map_data("world")
+ggplot(monde_map, aes(x = long, y = lat, group = group)) + geom_polygon(fill="lightgray", colour = "white")
+
+# Afficher quelque pays de l'Asie
+some.asie.countries <- c(
+  "Russia", "China", "Iran", "Mongolia", "India",
+  "Australia", "Kazakhstan", "North Korea", "South Korea",
+  "Nepal", "Pakistan","Japan","Iraq"
+)
+#turkey,syria,afghanistan,syria
+# Recuperer la map 
+some.asie.maps <- map_data("world", region = some.asie.countries)
+
+# Utilisé comme coordonnée étiquette pour les noms de pays
+region.lab.data <- some.asie.maps %>%
+  group_by(region) %>%
+  summarise(long = mean(long), lat = mean(lat))
+
+ggplot(some.asie.maps, aes(x = long, y = lat)) +
+  geom_polygon(aes( group = group, fill = region))+
+  geom_text(aes(label = region), data = region.lab.data,  size = 3, hjust = 0.5)+
+  scale_fill_viridis_d()+
+  theme_void()+
+  theme(legend.position = "left")
+```

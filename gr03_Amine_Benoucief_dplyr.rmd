@@ -1,0 +1,149 @@
+---
+title: "dplyr2"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+
+```{r}
+
+#install.packages("dplyr")
+
+library(dplyr)
+```
+
+
+
+```{r}
+#install.packages("questionr")
+library(questionr)
+data(hdv2003)
+rest <- hdv2003
+```
+
+#install questionr et biblio pour data hdv2003
+#On commance avec la cmd Filtre() >, <, == exemple :
+
+```{r}
+rest1 <- filter(rest, age >20)
+head(rest1)
+rest2 <- filter(rest,age == 22)
+head(rest2)
+```
+
+Filtre aussi les mots
+
+```{r}
+rest3 <- filter(rest, sport=='Non')
+View(rest3)
+```
+
+On peut aussi appliquer un filtre sur les 2
+
+```{r}
+rest4 <- filter(rest, age >20 & sport == 'Non')
+head(rest4)
+```
+
+ou
+```{r}
+rest5 <- filter(rest, age >20 , sport == 'Non')
+head(rest5)
+```
+
+Et on ajoute 3 critères aussi !
+```{r}
+rest6 <- filter(rest, age >20 ,sexe =='Femme', sport == 'Non')
+head(rest6)
+```
+
+creer des intervalles
+```{r}
+rest7 <- filter(rest,age >= 22, age <= 30)
+head(rest7)
+```
+
+faire une selection multiple
+```{r}
+rest8 <- filter(rest,age %in% c(20,22,60))
+View(rest8)
+```
+
+faire une selection multiple pour des elements different de 
+```{r}
+rest9 <- filter(rest,!age %in% c(20,22,60))
+View(rest9)
+
+rm(list = ls())
+#Command Mutate ()
+
+data(hdv2003)
+rest <- hdv2003
+```
+
+Creer une colonne avec age*10
+```{r}
+rest1 <- mutate(rest, age*10)
+View(rest1)
+```
+
+creer une colonne avec une difference 
+```{r}
+rest2 <- mutate(rest, diff= age-freres.soeurs)
+```
+creer une variable loi normal 
+```{r}
+y <- rnorm(2000,0,1)
+```
+
+attribué a chaque ligne 
+```{r}
+rest3 <- mutate(rest, nouv_var=y)
+View(rest3)
+
+rm(list = ls())
+# Command Arrange()
+data(hdv2003)
+rest <- hdv2003
+```
+
+Ranger les colonnes de facon croissante 
+```{r}
+rest1 <- arrange(rest, age)
+View(rest1)
+```
+
+Ranger les colonnes de façon decroissante 
+```{r}
+rest2 <- arrange(rest, desc(age))
+View(rest2)
+```
+
+Ranger une colonne non numerique Z à A
+```{r}
+rest3 <- arrange (rest, qualif)
+View(rest3)
+```
+
+Ranger une colonne non numerique A à Z
+```{r}
+rest4 <- arrange (rest, desc(qualif))
+View(rest4)
+```
+
+ranger plusieurs colonne 
+```{r}
+rest5 <- arrange(rest,nivetud,age)
+View(rest5)
+```
+
+ranger plusieurs colonne l'une asc et l'autre desc
+```{r}
+rest6 <- arrange(rest,nivetud,desc(age))
+View(rest6)
+
+rm(list = ls())
+```
