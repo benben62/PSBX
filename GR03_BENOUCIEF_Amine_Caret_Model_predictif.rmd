@@ -1,0 +1,93 @@
+---
+title: " Utilisation de Caret avec un model predictif "
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+``` 
+
+
+
+```{r pressure, echo=TRUE}
+#Installation de l'ensemble de ces packages
+#install.packages("tidyverse")
+#install.packages("caret")
+#install.packages("mlbench")
+#install.packages("lattice")
+#install.packages("rpart")
+#install.packages("xlsx")
+#tinytex::install_tinytex()
+library(here)
+library(tidyverse)
+library(caret)
+library(readxl)
+library(mlbench)
+library(rpart)
+library(xlsx)
+set.seed(12345)
+
+# Import des donnees
+df <- readxl::read_xlsx(path ="C:/Users/manu_/Desktop/caret.xlsx")
+
+# Changement du format de la date
+date <- as.Date(df$dateRep)
+df3 <- cbind(df,date)
+head(df3)
+
+# D'abord, on cree notre echantillon d'entrainement en prenant 75% 
+# du dataset et un echantillon test.
+train_data <- df3[df3$date < '2020-09-19',]
+test_data  <- df3[df3$date > '2020-09-19',]
+
+death <- test_data$deaths
+attach(df3)
+
+# Model 1: Creattion d'un modele de regression lineaire 
+# entrainer avec l'echantillon d'entrainement
+model_lm <- lm(deaths ~  cases + date, data = train_data)
+#Model 2: Utilisation de rpart pour cree un 
+# arbre de decison avec l'echantillon d'entrainement 
+model_rpart  <- rpart(deaths ~  cases + date, data = train_data)
+
+# On utlise les deux models pour faire 
+# une prediction en utilisant l'echantillon test
+predict_lm <- predict(model_lm, test_data)
+predict_lm <- data.frame(df3_Pred = predict_lm, df3 = test_data$deaths, date = test_data$date)
+predict_rpart  <- predict(model_rpart,  test_data)
+predict_rpart <- data.frame(df3_Pred = predict_rpart, df3 = test_data$deaths, date = test_data$date)
+
+# On verifie les resultats en affichant les 
+# premieres lignes des dataset de predictions
+head(predict_lm)
+head(predict_rpart)
+
+# On compare les resultats obtenue a l'aide d'un graph
+par(mfrow = c(1, 1))
+plot(predict_lm$df3_Pred - predict_lm$df3, main = "Difference lm")
+plot(predict_rpart$df3_Pred  - predict_rpart$df3,  main = "Difference rpart")
+
+# D'apres les resultats des 2 graphiques, on peut retenir le modele de regression lineaire 
+# car le nuage de points comme une reaction normal d'un virus, c'est a dire sur une premiere 
+# phase croissante qui correspond a la propagation du virus puis une deuxieme phase de pic 
+# des morts et pour finir une phase decroissante de la lethalite.
+
+# Nous pouvons voir qu'il y aura eventuelle troisieme vague. 
+
+```
+#Bibliographie 
+
+https://docs.microsoft.com/fr-fr/sql/machine-learning/tutorials/r-predictive-model-train?view=sql-server-ver15
+
+http://eric.univ-lyon2.fr/~ricco/tanagra/fichiers/fr_Tanagra_package_caret.pdf
+
+https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
+
+https://github.com/dsobo/caret-beginner-tutorial
+
+https://rstudio-pubs-static.s3.amazonaws.com/253860_05f11cddd938407a9cb3b06d9dc38c9a.html
+
+
+

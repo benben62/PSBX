@@ -1,0 +1,76 @@
+---
+title: "Ggplot2 en map"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r}
+# Tout d'abord nous devons installer le package Ggplot avec ce package
+#   Install.packages(ggplot2) 
+#Pour commencer 
+library(ggplot2)
+library(dplyr)
+#installed.packages("viridis")
+require(maps)
+require(viridis)
+theme_set(
+  theme_void()
+)
+monde_map <- map_data("world")
+ggplot(monde_map, aes(x = long, y = lat, group = group)) + geom_polygon(fill="lightgray", colour = "white") # cette fonction permet d'utiliser la longetiude et la latitude du fichier wolrd data pour virtualiser une carte. 
+
+# Afficher quelque pays de l'Asie
+some.asie.countries <- c(
+  "Russia", "China", "Iran", "Mongolia", "India",
+  "Australia", "Kazakhstan", "North Korea", "South Korea",
+  "Nepal", "Pakistan","Japan","Iraq"
+)
+#Nous pouvons ajouter autant d'etat que possible a la carte d'adapte grace aux noms des pays exemple : turkey,syria,afghanistan,syria
+# Recuperer la map 
+some.asie.maps <- map_data("world", region = some.asie.countries)
+
+# Utilisé comme coordonnée étiquette pour les noms de pays
+region.lab.data <- some.asie.maps %>%
+  group_by(region) %>%
+  summarise(long = mean(long), lat = mean(lat))
+
+ggplot(some.asie.maps, aes(x = long, y = lat)) +
+  geom_polygon(aes( group = group, fill = region))+
+  geom_text(aes(label = region), data = region.lab.data,  size = 3, hjust = 0.5)+
+  scale_fill_viridis_d()+
+  theme_void()+
+  theme(legend.position = "left") # <- permet de choisir la taille des noms des pays, de regrouper les pays grace à la colonne region et de mettre une legende a gauche/droite ou none
+#Autre exemple mais sans utiliser la geolocalisation  
+#Il faut installer les packages suivant 
+#install.packages('usmap')
+#install.packages('label')
+#install.packages('maptools')
+#install.packages('rgdal')
+library(usmap)
+require(usmap)
+
+#Permet d'afficher l'ensemble du pays  
+plot_usmap(regions = "counties")
+usmap::plot_usmap("states", labels = TRUE)
+cities_t <- usmap_transform(citypop)
+#Permet d'afficher un ou plusieurs Etat aux USA grace à l'acronym de l'etat
+usmap::plot_usmap("counties",
+                  include = c("MA","CT"),
+                  labels = TRUE, label_color = "black")
+```
+
+
+Bibliographie
+
+Map Etats-Unis grace à la long et lat 
+https://www.datanovia.com/en/blog/how-to-create-a-map-using-ggplot2/
+
+Etat-Unis map 
+https://cran.r-project.org/web/packages/usmap/vignettes/advanced-mapping.html
+
+Acronym Etats-unis : 
+https://www.ssa.gov/international/coc-docs/states.html
+
+
