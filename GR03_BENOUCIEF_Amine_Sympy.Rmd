@@ -1,0 +1,55 @@
+---
+title: "Utilisation du package Sympy"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+install.packages("rSymPy")
+library(rSymPy)
+# On declare notre variable x pour rendre la suite possible 
+x <- Var("x")
+
+# Simplification des nombres decimaux avec la fonction nsimplify 
+sympy("nsimplify(3.75)")
+
+# Reconnaissance de nombre. R peut reconnaitre des nombres tel que pi sans donner sa valeur exacte 
+sympy("simplify(cos(pi/6))")
+
+# Simplification d'expression. SymPy permet aussi de simplifier les expressions permettant 
+# de passer d'une forme a une autre.
+sympy("sqrt(15)")
+
+# Resolution de l'equation x^2 - 2 = 0  
+sympy("solve(x**2 - 2,x)")
+
+# Derivee premiere 
+sympy("diff(x**3,x,1)")
+
+# Derivee seconde 
+sympy("diff(x**3,x,2)")
+
+# Derivee troisieme 
+sympy("diff(x**3,x,3)")
+
+# SymPy peut aussi integrer des fonctions
+sympy("integrate(2*x)")  
+
+# Developper (x-2)*(x-2)
+sympy("((x-2)*(x-2))") 
+sympy("(2 * (x-2))") 
+
+
+```
+
+#Bibliographie 
+
+http://www.di.fc.ul.pt/~jpn/r/symbolic/
+
+https://docs.sympy.org/latest/tutorial/
+
+https://cran.r-project.org/web/packages/rSymPy/rSymPy.pdf
