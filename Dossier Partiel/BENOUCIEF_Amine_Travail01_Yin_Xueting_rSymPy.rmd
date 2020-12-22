@@ -1,6 +1,6 @@
 ---
 title: "Le travail de Xueting Yin **[est disponible ici](https://github.com/yinxueting/PSBX/blob/main/gr01_xueting_yin_rSymPy.pdf)**"
-author: "Xueting Yin"
+author: "BENOUCIEF  Amine"
 date: "22/12/2020"
 output: pdf_document
 ---
