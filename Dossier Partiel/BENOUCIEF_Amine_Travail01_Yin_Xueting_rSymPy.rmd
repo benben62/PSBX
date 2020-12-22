@@ -1,0 +1,56 @@
+---
+title: "Le travail de Xueting Yin **[est disponible ici](https://github.com/yinxueting/PSBX/blob/main/gr01_xueting_yin_rSymPy.pdf)**"
+author: "Xueting Yin"
+date: "22/12/2020"
+output: pdf_document
+---
+
+**SYNTHESE DU TRAVAIL EN QUESTION**
+
+rSymPy est un package de mathematiques qui sert a effectuer des calcules ainsi que les simplifier. C'est un bon travail qui resume bien les fonctionnalites de rSymPy. Xueting a donnee des explications pour la majorites des fonctions. Malheureusement elle n'a pas ajoute de  bibliographie, nous ne savons pas si elle s'est inspiree d`un travail ou elle a cree elle meme ses examples (si oui il fallait le preciser).
+
+## Ex1
+```{r}
+# install.packages("rSymPy")
+library(rSymPy) #chargement de package
+x <- Var("x")
+x+x+x  # addition
+x*x # au carré
+2*x # multiplication
+y <- Var("3*x")
+y/x # division
+y*x
+z <- Var("x**2")
+x*y+z
+```
+
+## Ex2
+```{r}
+sympy("sqrt(100).evalf()") # racine carré
+sympy("sqrt(100).evalf(30)") # 30 décimales
+sympy("pi.evalf(100)") #100 décimales
+sympy("expand((x + 2)*(x - 3))") # équation
+```
+
+## Ex3
+```{r}
+sympy("y = x*x")
+sympy("A = Matrix([[1,x], [y,1]])")
+sympy("A**2")
+```
+
+**EVALUATION DU TRAVAIL EN QUESTION**
+
+Critère 1 : Visuel sur pdf             3/4 Peut etre ameliorer. 
+
+Critère 2 : Originalite du code        3/4 Utilisation de fonctions essentiels mais reste simple. 
+
+Critère 3 : Fonctionnalité du code     4/4 tout fonctionne.
+
+Critère 4 : Lisibilité du code         3/4 très simple et lisible.
+
+Critère 5 : Explications données       3/4 Explications bref sur certaines lignes, voir pas d'explications pour certaines fonctions. Des commentaires supplementaires peuvent etre ajoutes. 
+
+**CONCULSION**
+
+Globalement bon travail avec les fonctions essentiels. Un peu plus d'explication aurait rendu excellent.
