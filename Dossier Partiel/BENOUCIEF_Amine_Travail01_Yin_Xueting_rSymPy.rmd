@@ -51,6 +51,6 @@ Critère 4 : Lisibilité du code         3/4 très simple et lisible.
 
 Critère 5 : Explications données       3/4 Explications bref sur certaines lignes, voir pas d'explications pour certaines fonctions. Des commentaires supplementaires peuvent etre ajoutes. 
 
-**CONCULSION**
+**CONCLUSION**
 
 Globalement bon travail avec les fonctions essentiels. Un peu plus d'explication aurait rendu excellent.
