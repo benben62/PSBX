@@ -1,0 +1,96 @@
+---
+title: "Le travail de Tarik Hakam **[est disponible ici](https://github.com/T-Hak/PSBX/blob/main/Tutoriel%20rSymPy/gr02_hakam_tarik_rsympy.pdf)**"
+author: "BENOUCIEF Amine"
+date: "22/12/2020"
+output: pdf_document
+---
+
+**SYNTHESE DU TRAVAIL EN QUESTION**
+
+rSymPy est un package de mathematiques qui sert a effectuer des calcules ainsi que les simplifier. C’est
+un bon travail qui resume bien les fonctionnalites de rSymPy. Tarek a fait un bon travail sur la forme ainsi que le fonds, expliquant bien sa demarche et sa logique. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction 
+
+**rSymPy** est le package Python de référence pour effectuer des calculs symboliques simples. [@Laude_Henri]
+
+```{r}
+library(rSymPy)
+```
+
+Prenons pour exemple le calcul du carré d'une matrice. [@CRAN]
+
+Pour se faire, nous définissons la variable $x$ de la façon suivante :
+
+```{r}
+sympy("var('x')")
+```
+
+
+Puis, nous définissons la fonction $y$ en fonction de $x$ telle que :
+
+\begin{equation}
+y = x \times x = x^2
+\end{equation}
+
+que l'on code de la façon suivante : 
+
+```{r}
+sympy("y = x*x")
+sympy("y")
+```
+
+Nous poursuivons par la définion de la matrice que l'on nomme $A$ en fonction des variables $x$ et $y$, de dimension $n \times n$ avec $n = 2$.
+
+Le code R est le suivant : 
+
+```{r}
+# Création de la matrice A en fonction de x et y précédemment définis
+cat(sympy("A = Matrix([[1,x], [y,1]])"), "\n")
+```
+
+La fonction **cat()** nous permet de mettre en forme notre matrice pour le rendre plus lisible.
+
+Pour finir, nous procédons au calcul du carré de la matrice $A \times A$.
+
+```{r}
+# Carré de la matrice A
+cat(sympy("A**2"), "\n")
+```
+
+Pour dernier exemple, pour illustrer les usages du package **rSymPy**, nous procédons au calcul de la limite de la fonction $\sqrt(x)$ pour $x \rightarrow \infty$ soit : 
+
+\begin{equation}
+  \lim_{x\to\infty} \sqrt(x) = \infty
+\end{equation}
+
+```{r}
+sympy("limit(sqrt(x), x, oo)")
+```
+
+# **Bibliographie**
+
+
+**EVALUATION DU TRAVAIL EN QUESTION**
+
+Critère 1 : Visuel sur pdf             3/4 Agreable a lire. 
+
+Critère 2 : Originalite du code        4/4 Tarek a montre des elements de rSymPy que les autres n'ont pas montrer. 
+
+Critère 3 : Fonctionnalité du code     4/4 Le code fonctionne.
+
+Critère 4 : Lisibilité du code         4/4 Claire et lisible.
+
+Critère 5 : Explications données       4/4 Toutes les explications sont claire sur chaque ligne de code.
+
+**CONCLUSION**
+
+Globalement un tres bon travail qui exlique tres bien rSymPy et donc pas necessaire de commenter les lignes de code. Il a su montre des choses que les autres n'ont pas fait ce qui lui fait gagner de points. 
+
+
