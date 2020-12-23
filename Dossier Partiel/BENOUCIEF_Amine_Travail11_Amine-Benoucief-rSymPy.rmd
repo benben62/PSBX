@@ -1,0 +1,68 @@
+---
+title: "Le travail de Benoucief Amine **[est disponible ici](https://github.com/benben62/PSBX/blob/main/GR03_BENOUCIEF_Amine_Sympy.pdf)**"
+author: "BENOUCIEF Amine"
+output: pdf_document
+---
+
+**SYNTHESE DU TRAVAIL EN QUESTION**
+
+rSymPy est un package de mathematiques qui sert a effectuer des calcules ainsi que les simplifier. C’est
+un bon travail qui resume bien les fonctionnalites de rSymPy. J'ai fait un bon travail sur le fonds, expliquant bien les fonctionnalites du package. D'autres element aurait pu etre ajouter tel que la fonction pour calculer des limites. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+#install.packages("rSymPy")
+library(rSymPy)
+# On declare notre variable x pour rendre la suite possible 
+x <- Var("x")
+# Simplification des nombres decimaux avec la fonction nsimplify 
+sympy("nsimplify(3.75)")
+# Reconnaissance de nombre. R peut reconnaitre des nombres tel que pi sans donner sa valeur exacte 
+sympy("simplify(cos(pi/6))")
+# Simplification d'expression. SymPy permet aussi de simplifier les expressions permettant 
+# de passer d'une forme a une autre.
+sympy("sqrt(15)")
+# Resolution de l'equation x^2 - 2 = 0  
+sympy("solve(x**2 - 2,x)")
+# Derivee premiere 
+sympy("diff(x**3,x,1)")
+# Derivee seconde 
+sympy("diff(x**3,x,2)")
+# Derivee troisieme 
+sympy("diff(x**3,x,3)")
+# SymPy peut aussi integrer des fonctions
+sympy("integrate(2*x)")  
+# Developper (x-2)*(x-2)
+sympy("((x-2)*(x-2))") 
+sympy("(2 * (x-2))") 
+```
+
+#Bibliographie 
+
+http://www.di.fc.ul.pt/~jpn/r/symbolic/
+
+https://docs.sympy.org/latest/tutorial/
+
+https://cran.r-project.org/web/packages/rSymPy/rSymPy.pdf
+
+
+**EVALUATION DU TRAVAIL EN QUESTION**
+
+Critère 1 : Visuel sur pdf             3/4 Agreable a lire, une amelioration sur la forme (au niveau des explications des                                              lignes de code) pour rendre le pdf plus esthetique. 
+
+Critère 2 : Originalite du code        3/4 Une demarche classique, similaire au travail des autres eleves. 
+
+Critère 3 : Fonctionnalité du code     4/4 Le code fonctionne.
+
+Critère 4 : Lisibilité du code         4/4 Claire et lisible.
+
+Critère 5 : Explications données       4/4 Toutes les explications sont claire sur chaque ligne de code.
+
+**CONCLUSION**
+
+Globalement un bon travail, une amelioration sur l'esthetique l'aurait amener a un niveau superieur. 
