@@ -1,0 +1,133 @@
+---
+title: "Le travail de Benoucief Amine **[est disponible ici](https://github.com/benben62/PSBX/blob/main/GR03_BENOUCIEF_Amine_Dplyr.pdf)**"
+author: "BENOUCIEF Amine"
+date: "22/12/2020"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+**SYNTHESE DU TRAVAIL EN QUESTION**
+
+dplyr est une extension facilitant le traitement et la manipulation de données 
+contenues dans une ou plusieurs tables. Elle propose une syntaxe claire et 
+cohérente, sous formes de verbes, pour la plupart des opérations de ce type.
+J'estime avoir montrer comment utiliser les principale fonctions de ce 
+package, neanmoins d'autres fonctions aurait pu etre ajouter pour 
+montrer la richesse de Dplyr mais etant donnee que le travail etait long, 
+rajouter d'autres element aurait la lecture moins agreable. 
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+#Nous essayerons d'utiliser le package Dplyr au maximum grâce a des exemples.
+#install.packages("dplyr")
+library(dplyr)
+#install.packages("questionr")
+library(questionr)
+data(hdv2003)
+rest <- hdv2003
+#install questionr et biblio pour data hdv2003
+#On commance avec la cmd Filtre() >, <, == exemple :
+rest1 <- filter(rest, age >20)
+head(rest1)
+rest2 <- filter(rest,age == 22)
+head(rest2)
+#Filtre aussi les mots
+rest3 <- filter(rest, sport=='Non')
+head(rest3)
+#On peut aussi appliquer un filtre sur les 2
+rest4 <- filter(rest, age >20 & sport == 'Non')
+head(rest4)
+#ou
+rest5 <- filter(rest, age >20 , sport == 'Non')
+head(rest5)
+#Et on ajoute 3 critères aussi !
+rest6 <- filter(rest, age >20 ,sexe =='Femme', sport == 'Non')
+head(rest6)
+#creer des intervalles
+rest7 <- filter(rest,age >= 22, age <= 30)
+head(rest7)
+#faire une selection multiple
+rest8 <- filter(rest,age %in% c(20,22,60))
+head(rest8)
+# faire une selection multiple pour des elements different de 
+rest9 <- filter(rest,!age %in% c(20,22,60))
+head(rest9)
+rm(list = ls())
+#Command Mutate ()
+data(hdv2003)
+rest <- hdv2003
+#Creer une colonne avec age*10
+rest1 <- mutate(rest, age*10)
+head(rest1)
+#creer une colonne avec une difference 
+head <- mutate(rest, diff= age-freres.soeurs)
+#creer une variable loi normal 
+y <- rnorm(2000,0,1)
+#attribué a chaque ligne 
+rest3 <- mutate(rest, nouv_var=y)
+head(rest3)
+rm(list = ls())
+# Command Arrange()
+data(hdv2003)
+rest <- hdv2003
+#Ranger les colonnes de facon croissante 
+rest1 <- arrange(rest, age)
+head(rest1)
+#Ranger les colonnes de façon decroissante 
+rest2 <- arrange(rest, desc(age))
+head(rest2)
+#Ranger une colonne non numerique Z à A
+rest3 <- arrange (rest, qualif)
+head(rest3)
+#Ranger une colonne non numerique A à Z
+rest4 <- arrange (rest, desc(qualif))
+head(rest4)
+#ranger plusieurs colonne 
+rest5 <- arrange(rest,nivetud,age)
+head(rest5)
+#ranger plusieurs colonne l'une asc et l'autre desc
+rest6 <- arrange(rest,nivetud,desc(age))
+head(rest6)
+rm(list = ls())
+```
+
+#Bibliographie
+
+
+https://bookdown.org/fousseynoubah/dswr_book/transformer-de-donnees-avec-dplyr.html
+
+https://atrebas.github.io/post/2019-03-03-datatable-dplyr/#filter-rows
+
+https://antoinesir.rbind.io/post/comparaisons-base-r-dplyr-data-table/
+
+https://juba.github.io/tidyverse/10-dplyr.html
+
+
+**EVALUATION DU TRAVAIL EN QUESTION**
+
+
+Critère 1 : Visuel sur pdf             3/4 Agreable a lire, de meme une amelioration sur la forme 
+                                           pour rendre le pdf plus esthetique. 
+
+Critère 2 : Originalite du code        3/4 Une demarche originale, expliquant bien la richesse de Dplyr.  
+
+Critère 3 : Fonctionnalité du code     4/4 Le code fonctionne.
+
+Critère 4 : Lisibilité du code         4/4 Claire et lisible.
+
+Critère 5 : Explications données       4/4 Toutes les explications sont claire sur chaque ligne de code.
+
+
+**CONCLUSION**
+
+Globalement un bon travail, une amelioration sur l'esthetique l'aurait amener a un niveau superieur. De bon examples sont utiliser pour faciliter la comprehension du package. 
+
